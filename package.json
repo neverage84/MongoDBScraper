@@ -1,0 +1,28 @@
+{
+  "name": "mongodbscraper",
+  "version": "1.0.0",
+  "description": "Mongoose, Mongo, and Cheerio used to scrape articles",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neverage84/MongoDBScraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neverage84/MongoDBScraper/issues"
+  },
+  "homepage": "https://github.com/neverage84/MongoDBScraper#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "materialize-css": "^1.0.0-rc.2",
+    "mongoose": "^5.8.11"
+  }
+}
