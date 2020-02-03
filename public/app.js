@@ -42,4 +42,15 @@ $(document).ready(function(){
         })
     });
 
+
+        $(".Home").on("click", function(event){
+            event.preventDefault();
+            alert("Home");
+            $.ajax({
+                method: "GET",
+                url: "/"
+            }).then(function(data) {
+               
+            })
+        });
 });
