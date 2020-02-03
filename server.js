@@ -63,7 +63,8 @@ app.get("/scrape", function(req, res) {
         .nextAll('.summary')
         .children("p")
         .text();
-        result.link = $(this)
+        result.link = "https://dnd.wizards.com/" + 
+           $(this)
           .children("a")
           .attr("href");
 
@@ -88,9 +89,9 @@ app.get("/scrape", function(req, res) {
   });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/", function(req, res) {
     // Grab every document in the Articles collection
-    db.Article.find({}, "title summary")
+    db.Article.find({}, "title summary link")
       .then(function(dbArticle) {
         // If we were able to successfully find Articles, send them back to the client
         // res.json(dbArticle);
@@ -98,7 +99,7 @@ app.get("/articles", function(req, res) {
         // article.push(dbArticle);
         console.log(dbArticle);
         const articles = dbArticle.map(function(article){
-            return {_id:article._id, title:article.title, summary: article.summary}
+            return {_id:article._id, title:article.title, summary: article.summary, link: article.link}
         });
         console.log(articles);
         res.render("index", { article : articles});
@@ -127,15 +128,13 @@ app.get("/Clear", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
- 
-
-
-
     });
 
         // console.log(article);
 
-     
+        app.get("/SavePage", function(req, res) {
+            res.render("saved");
+            });
 
 
 
