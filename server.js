@@ -136,7 +136,42 @@ app.get("/Clear", function(req, res) {
             res.render("saved");
             });
 
+         app.get("/saveArticle/:id", function(req, res) {
+                // First, we grab the body of the html with axios
+         // Then, we load that into cheerio and save it to $ for a shorthand selector
+         db.Article.findOne({ _id: req.params.id}, "title summary link")
+         .then(function(dbArticle) {
+           // If we were able to successfully find Articles, send them back to the client
+          
+           
+           
+           var result = {};
+  
+        // Add the text and href of every link, and save them as properties of the result object
+        result.title = dbArticle.title;
+        result.summary = dbArticle.summary;
+        result.link = dbArticle.link;
 
+            db.Saved.create(result)
+            .then(function(dbArticle) {
+              // View the added result in the console
+              console.log(dbArticle);
+              
+            })
+            .catch(function(err) {
+              // If an error occurred, log it
+              console.log(err);
+            });
+        });
+    });
+
+     
+
+                  
+        
+                  
+               
+           
 
 
 

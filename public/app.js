@@ -53,4 +53,16 @@ $(document).ready(function(){
                
             })
         });
+        $(".Saved").on("click", function(event){
+            event.preventDefault();
+            alert("Saved");
+            var thisId = $(this).attr("data-id");
+            console.log($(thisId));
+            $.ajax({
+                method: "GET",
+                url: "/saveArticle/" + thisId
+            }).then(function(data) {
+               
+            })
+        });
 });
