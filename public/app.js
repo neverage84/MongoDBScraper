@@ -67,9 +67,11 @@ $(document).ready(function(){
         });
         $(".NotePop").on("click", function(event){
             event.preventDefault();
-            $("#notes").empty();
+        
             var thisid = $(this).attr("data-id");
-            alert(thisid);
+            var thistitle = $(this).attr("data-title");
+            $("#notes").text(thistitle);;
+            alert(thistitle);
             $.ajax({
                 method: "GET",
                 url: "/articles/" + thisid
