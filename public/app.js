@@ -67,7 +67,9 @@ $(document).ready(function(){
         });
         $(".NotePop").on("click", function(event){
             event.preventDefault();
-            alert("NotePop");
+            $("#notes").empty();
+            var thisid = $(this).attr("data-id");
+            alert(thisid);
         })
 
 });
