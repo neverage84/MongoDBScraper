@@ -81,14 +81,37 @@ $(document).ready(function(){
 
                 // A button to submit a new note, with the id of the article saved to it
                 $("#savebutton").append("<button class='btn waves-effect waves-light' data-id='" + thisid + "' id='savenote'>Save Note</button>");
-
-                if (data.note) {
-                    // Place the title of the note in the title input
+                console.log("HEY");
+                // if (data.note) {
+                //     // Place the title of the note in the title input
                     
-                    // Place the body of the note in the body textarea
-                    $("#bodyinput").val(data.note.body);
-                  }
+                //     // Place the body of the note in the body textarea
+                //     $("#bodyinput").val(data.note.body);
+                //   }
             })
         })
-
+        $(document).on("click", "#savenote", function() {
+            // Grab the id associated with the article from the submit button
+            var thisId = $(this).attr("data-id");
+        
+            // Run a POST request to change the note, using what's entered in the inputs
+            $.ajax({
+              method: "POST",
+              url: "/submit/" + thisId,
+              data: {
+                // Value taken from note textarea
+                body: $("#textarea1").val()
+              }
+            })
+              // With that done
+              .then(function(data) {
+                // Log the response
+                console.log(data);
+                // Empty the notes section
+                $("#notes").empty();
+                $("#textarea1").val("");
+              });
+          
+       
+          });
 });
