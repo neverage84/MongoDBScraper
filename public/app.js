@@ -46,23 +46,28 @@ $(document).ready(function(){
         $(".Home").on("click", function(event){
             event.preventDefault();
             alert("Home");
-            $.ajax({
-                method: "GET",
-                url: "/"
+              $.ajax({
+                    method: "GET",
+                    url: "/"
             }).then(function(data) {
-               
+              
             })
         });
-        $(".Saved").on("click", function(event){
+        $(".Note").on("click", function(event){
             event.preventDefault();
-            alert("Saved");
+            alert("Note");
             var thisId = $(this).attr("data-id");
             console.log($(thisId));
             $.ajax({
                 method: "GET",
-                url: "/saveArticle/" + thisId
+                url: "/Note/" + thisId
             }).then(function(data) {
                
             })
         });
+        $(".NotePop").on("click", function(event){
+            event.preventDefault();
+            alert("NotePop");
+        })
+
 });

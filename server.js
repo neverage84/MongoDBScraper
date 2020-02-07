@@ -130,40 +130,85 @@ app.get("/Clear", function(req, res) {
     });
     });
 
+// Route for saving a new Note to the db and associating it with a User
+app.post("/submit", function(req, res) {
+    // Create a new Note in the db
+    console.log(req.body);
+    db.Note.create(req.body)
+      .then(function(dbNote) {
+        console.log(dbNote._id);
+      
+    //     // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
+    //     // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+    //     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+        
+        // return db.Article.findOneAndUpdate({}, { $push: { notes: dbNote._id } }, { new: true });
+        
+      })
+      .then(function(dbArticle) {
+    //     // If the User was updated successfully, send it back to the client
+       
+      })
+      .catch(function(err) {
+    //     // If an error occurs, send it back to the client
+        res.json(err);
+      });
+  });
+
+
+
+
         // console.log(article);
 
-        app.get("/SavePage", function(req, res) {
-            res.render("saved");
-            });
+//         app.get("/SavePage", function(req, res) {
+//         //     db.Saved.find({}, "title summary link")
+//         //         .then(function(dbArticle) {
+//         // // If we were able to successfully find Articles, send them back to the client
+//         // // res.json(dbArticle);
+//         // // var article = [];
+//         // // article.push(dbArticle);
+//         //         console.log(dbArticle);
+//         //         const savedarticles = Saved.map(function(saved){
+//         //     return {_id:saved._id, title:saved.title, summary: saved.summary, link: saved.link}
+//         // });
+//         // console.log(savedarticles);
+//         res.render("saved");
+//         // console.log(article);
+//     //   })
+//     //   .catch(function(err) {
+//     //     // If an error occurred, send it to the client
+//     //     res.json(err);
+//     //   });
+// });
 
-         app.get("/saveArticle/:id", function(req, res) {
-                // First, we grab the body of the html with axios
-         // Then, we load that into cheerio and save it to $ for a shorthand selector
-         db.Article.findOne({ _id: req.params.id}, "title summary link")
-         .then(function(dbArticle) {
-           // If we were able to successfully find Articles, send them back to the client
+    //      app.get("/saveArticle/:id", function(req, res) {
+    //             // First, we grab the body of the html with axios
+    //      // Then, we load that into cheerio and save it to $ for a shorthand selector
+    //      db.Article.findOne({ _id: req.params.id}, "title summary link")
+    //      .then(function(dbArticle) {
+    //        // If we were able to successfully find Articles, send them back to the client
           
            
            
-           var result = {};
+    //        var result = {};
   
-        // Add the text and href of every link, and save them as properties of the result object
-        result.title = dbArticle.title;
-        result.summary = dbArticle.summary;
-        result.link = dbArticle.link;
+    //     // Add the text and href of every link, and save them as properties of the result object
+    //     result.title = dbArticle.title;
+    //     result.summary = dbArticle.summary;
+    //     result.link = dbArticle.link;
 
-            db.Saved.create(result)
-            .then(function(dbArticle) {
-              // View the added result in the console
-              console.log(dbArticle);
+    //         db.Saved.create(result)
+    //         .then(function(dbArticle) {
+    //           // View the added result in the console
+    //           console.log(dbArticle);
               
-            })
-            .catch(function(err) {
-              // If an error occurred, log it
-              console.log(err);
-            });
-        });
-    });
+    //         })
+    //         .catch(function(err) {
+    //           // If an error occurred, log it
+    //           console.log(err);
+    //         });
+    //     });
+    // });
 
      
 
