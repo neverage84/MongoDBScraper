@@ -136,7 +136,7 @@ app.post("/submit", function(req, res) {
     console.log(req.body);
     db.Note.create(req.body)
       .then(function(dbNote) {
-        console.log(dbNote._id);
+        console.log(dbNote._id)
       
     //     // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
     //     // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
@@ -154,6 +154,17 @@ app.post("/submit", function(req, res) {
         res.json(err);
       });
   });
+
+  app.get("/article/:id"), function(req,res){
+      db.Article.findOne({_id: req.params.id})
+      .populate("note")
+      .then(function(dbArtcicle){
+          console.log(dbArticle);
+      })
+      .catch(function(err){
+          console.log(err);
+      })
+  }
 
 
 

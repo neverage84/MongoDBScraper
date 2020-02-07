@@ -70,6 +70,13 @@ $(document).ready(function(){
             $("#notes").empty();
             var thisid = $(this).attr("data-id");
             alert(thisid);
+            $.ajax({
+                method: "GET",
+                url: "/articles/" + thisid
+            })
+            .then(function(data){
+                
+            })
         })
 
 });
