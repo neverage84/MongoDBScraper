@@ -155,16 +155,16 @@ app.post("/submit", function(req, res) {
       });
   });
 
-  app.get("/article/:id"), function(req,res){
-      db.Article.findOne({_id: req.params.id})
-      .populate("note")
-      .then(function(dbArtcicle){
-          console.log(dbArticle);
-      })
-      .catch(function(err){
-          console.log(err);
-      })
-  }
+//   app.get("/articles/:id"), function(req,res){
+//       db.Article.find({})
+      
+//       .then(function(dbArticle){
+//           console.log(dbArticle);
+//       })
+//       .catch(function(err){
+//           console.log(err);
+//       })
+//   }
 
 
 
@@ -221,10 +221,23 @@ app.post("/submit", function(req, res) {
     //     });
     // });
 
-     
+app.get("/articles/:id", function(req,res) {
+    console.log("GOT");
+    db.Article.findOne({ _id: req.params.id })
+    // ..and populate all of the notes associated with it
+    .populate("note")
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbArticle);
+    console.log(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
                   
-        
                   
                
            
