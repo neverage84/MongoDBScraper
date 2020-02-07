@@ -80,7 +80,7 @@ $(document).ready(function(){
                 $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
 
                 // A button to submit a new note, with the id of the article saved to it
-                $("#notes").append("<button class='btn waves-effect waves-light' data-id='" + thisid + "' id='savenote'>Save Note</button>");
+                $("#savebutton").append("<button class='btn waves-effect waves-light' data-id='" + thisid + "' id='savenote'>Save Note</button>");
 
                 if (data.note) {
                     // Place the title of the note in the title input
