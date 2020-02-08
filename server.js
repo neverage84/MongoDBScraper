@@ -29,9 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/MongoScraper", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/MongoScraper";
 
-
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -141,7 +141,7 @@ app.post("/submit/:id", function(req, res) {
     //     // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
     //     // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
         // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {note: dbNote._id} }, { new: true });
       
       })
       .then(function(dbArticle) {
@@ -228,7 +228,6 @@ app.get("/articles/:id", function(req,res) {
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
-    
     })
     .catch(function(err) {
       // If an error occurred, send it to the client

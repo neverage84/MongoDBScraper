@@ -71,23 +71,25 @@ $(document).ready(function(){
             var thisid = $(this).attr("data-id");
             var thistitle = $(this).attr("data-title");
             $("#notes").text(thistitle);;
-            alert(thisid);
             $.ajax({
                 method: "GET",
                 url: "/articles/" + thisid
             })
             .then(function(data){
-                $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+                console.log(data.note);
+                // $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
 
                 // A button to submit a new note, with the id of the article saved to it
-                $("#savebutton").append("<button class='btn waves-effect waves-light' data-id='" + thisid + "' id='savenote'>Save Note</button>");
-                console.log("HEY");
-                // if (data.note) {
-                //     // Place the title of the note in the title input
-                    
-                //     // Place the body of the note in the body textarea
-                //     $("#bodyinput").val(data.note.body);
-                //   }
+                $("#savebutton").append("<button class='btn waves-effect  deep-purple darken-4 waves-light' data-id='" + thisid + "' id='savenote'>Save Note</button>");
+               
+                if (data.note[0]) {
+                    // Place the title of the note in the title input
+                  for(var i = 0; i < data.note.length; i++){
+                    $("#notes").append("<textarea class='bodyinput' name='body' >"+data.note[i].body+"</textarea>");
+                  }
+                    // Place the body of the note in the body textarea
+                    // $("#bodyinput").val(data.note[0].body);
+                  }
             })
         })
         $(document).on("click", "#savenote", function() {
