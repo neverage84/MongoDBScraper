@@ -1,7 +1,7 @@
 # MongoDBScraper
 
  # INTRODUCTION
-I created a web app that lets users view and leave comments on the latest news scraped from DnD.Wizards.com. 
+A web app that lets users scrape the latest news articles from DnD.Wizards.com, click link to go directly to the article, view and leave comments, and clear the last news scrape.
 
 ![Alt Text](https://github.com/neverage84/MongoDBScraper/blob/master/Mongo%20Scraper.gif?raw=true)
 
